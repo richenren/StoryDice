@@ -1,0 +1,42 @@
+export const iconLibrary = [
+  { id: 'kid', label: '小朋友', category: '人物', tone: 'peach' },
+  { id: 'grandma', label: '奶奶', category: '人物', tone: 'rose' },
+  { id: 'robot', label: '机器人', category: '人物', tone: 'blue' },
+  { id: 'dragon', label: '小龙', category: '人物', tone: 'mint' },
+  { id: 'cat', label: '小猫', category: '人物', tone: 'lavender' },
+  { id: 'wizard', label: '魔法师', category: '人物', tone: 'lilac' },
+  { id: 'school', label: '学校', category: '地点', tone: 'yellow' },
+  { id: 'forest', label: '森林', category: '地点', tone: 'mint' },
+  { id: 'space', label: '太空', category: '地点', tone: 'blue' },
+  { id: 'island', label: '小岛', category: '地点', tone: 'peach' },
+  { id: 'castle', label: '城堡', category: '地点', tone: 'rose' },
+  { id: 'kitchen', label: '厨房', category: '地点', tone: 'yellow' },
+  { id: 'treasure', label: '宝箱', category: '事件', tone: 'yellow' },
+  { id: 'ball', label: '足球比赛', category: '事件', tone: 'mint' },
+  { id: 'rain', label: '突然下雨', category: '事件', tone: 'blue' },
+  { id: 'fly', label: '飞上天空', category: '事件', tone: 'lilac' },
+  { id: 'birthday', label: '生日派对', category: '事件', tone: 'rose' },
+  { id: 'lost', label: '找不到东西', category: '事件', tone: 'peach' },
+  { id: 'morning', label: '清晨', category: '时间', tone: 'yellow' },
+  { id: 'night', label: '夜晚', category: '时间', tone: 'blue' },
+  { id: 'happy', label: '开心', category: '心情', tone: 'yellow' },
+  { id: 'scared', label: '有点害怕', category: '心情', tone: 'lavender' },
+  { id: 'curious', label: '好奇', category: '心情', tone: 'mint' },
+  { id: 'silly', label: '想搞个恶作剧', category: '心情', tone: 'peach' },
+]
+
+export const blindboxCategories = [
+  { id: 'person', name: '人物', color: 'peach', prompts: ['小朋友', '勇敢的机器人', '爱唱歌的奶奶', '迷路的小龙', '会说话的小猫', '笨手笨脚的魔法师', '爱吃饼干的校长', '一只会跳舞的企鹅'] },
+  { id: 'place', name: '地点', color: 'mint', prompts: ['学校操场', '神秘森林', '月亮背面', '海边小岛', '会移动的城堡', '爸爸的厨房', '云朵上的城市', '玩具王国'] },
+  { id: 'event', name: '发生了什么', color: 'yellow', prompts: ['发现一个宝箱', '参加足球比赛', '天空突然下起糖果雨', '一不小心飞了起来', '准备一场生日派对', '把重要东西弄丢了', '所有东西都倒着走', '听见墙壁后面有声音'] },
+  { id: 'time', name: '时间', color: 'blue', prompts: ['星期一的清晨', '深夜十二点', '暑假的最后一天', '暴风雨来临之前', '未来的一百年后', '生日当天'] },
+  { id: 'mood', name: '心情', color: 'rose', prompts: ['兴奋极了', '有一点害怕', '特别好奇', '气呼呼的', '觉得很好笑', '心里藏着一个秘密'] },
+]
+
+export const starterLines = [
+  '那天，一件谁也没想到的事情发生了……',
+  '本来一切都很正常，直到……',
+  '如果你以为这只是一个普通的日子，那就错了！',
+  '大家都说这不可能，可是他偏偏……',
+  '最奇怪的是，所有人都假装什么也没发生……',
+]
