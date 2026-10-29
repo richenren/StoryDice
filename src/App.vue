@@ -193,7 +193,12 @@ loadStories()
             <span class="card-number">{{ String(index + 1).padStart(2, '0') }}</span>
             <span v-if="lockedIds.includes(card.id)" class="lock-badge">锁住啦</span>
             <svg class="picture-svg" viewBox="0 0 120 108" role="img" :aria-label="card.label">
-              <g v-if="['kid','grandma','wizard'].includes(card.id)">
+              <g v-if="card.emoji && !['kid','grandma','wizard','robot','dragon','cat','school','forest','space','island','castle','kitchen','treasure','ball','rain','fly','birthday','lost','morning','night','happy','scared','curious','silly'].includes(card.id)">
+                <circle cx="60" cy="54" r="43" fill="#fffdf8" stroke="rgba(107,89,70,.16)" stroke-width="2"/>
+                <text x="60" y="69" text-anchor="middle" font-size="48" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif">{{ card.emoji }}</text>
+                <path d="M18 91Q60 84 102 91" fill="none" stroke="rgba(107,89,70,.13)" stroke-width="2.5" stroke-linecap="round"/>
+              </g>
+              <g v-else-if="['kid','grandma','wizard'].includes(card.id)">
                 <circle cx="60" cy="35" r="22" fill="#f5c89f" stroke="#6d5a4b" stroke-width="2.4"/>
                 <path v-if="card.id !== 'grandma'" d="M38 31Q39 9 61 11Q82 12 82 31L75 24L44 25Z" fill="#6b5144"/>
                 <path v-else d="M39 33Q31 8 51 13Q63 2 77 15Q91 28 81 42L73 26L45 25Z" fill="#f5f0e8" stroke="#8a7c6e" stroke-width="2"/>
