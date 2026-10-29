@@ -27,6 +27,8 @@ npm install
 npm run dev
 ```
 
+默认开发地址：**http://localhost:5165**。如果 5165 端口已被占用，Vite 会直接报错，不会静默切换端口。
+
 构建生产版本：
 
 ```bash
