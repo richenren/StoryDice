@@ -40,6 +40,17 @@ function sampleCards(count, excluded = []) {
 function rollDice() {
   const fixed = diceCards.value.filter(card => lockedIds.value.includes(card.id))
   const next = sampleCards(diceCount - fixed.length, fixed.map(card => card.id))
+
+  // 每次骰子组合至少出现一个故事角色，帮助低龄孩子更容易开始讲故事。
+  if (![...fixed, ...next].some(card => card.category === '人物') && next.length > 0) {
+    const availableCharacters = iconLibrary.filter(
+      card => card.category === '人物' && !fixed.some(item => item.id === card.id)
+    )
+    if (availableCharacters.length) {
+      next[next.length - 1] = availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
+    }
+  }
+
   diceCards.value = [...fixed, ...next]
 }
 function toggleLock(id) {
