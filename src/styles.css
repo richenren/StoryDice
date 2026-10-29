@@ -9,3 +9,5 @@
 
 .prompt-actions{margin-left:auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.prompt-actions .text-button{margin-left:0}
 @media(max-width:600px){.prompt-actions{width:100%;justify-content:flex-end;gap:9px}}
+
+.free-play-note{display:block;margin-top:5px;color:#aa9278;font-size:10px;line-height:1.6}.prompt-strip>div:nth-child(2){min-width:0}
