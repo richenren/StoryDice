@@ -196,7 +196,7 @@ loadStories()
               <g v-if="card.emoji && !['kid','grandma','wizard','robot','dragon','cat','school','forest','space','island','castle','kitchen','treasure','ball','rain','fly','birthday','lost','morning','night','happy','scared','curious','silly'].includes(card.id)">
                 <circle cx="60" cy="54" r="43" fill="#fffdf8" stroke="rgba(107,89,70,.16)" stroke-width="2"/>
                 <text x="60" y="69" text-anchor="middle" font-size="48" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif">{{ card.emoji }}</text>
-                <path d="M18 91Q60 84 102 91" fill="none" stroke="rgba(107,89,70,.13)" stroke-width="2.5" stroke-linecap="round"/>
+
               </g>
               <g v-else-if="['kid','grandma','wizard'].includes(card.id)">
                 <circle cx="60" cy="35" r="22" fill="#f5c89f" stroke="#6d5a4b" stroke-width="2.4"/>
