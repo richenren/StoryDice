@@ -238,7 +238,7 @@ loadStories()
           <p><span class="tiny-sparkle">✦</span> 选中 {{ lockedIds.length }} 个图案已锁定，再掷一次试试！</p>
           <button class="button-primary" @click="rollDice"><span>↻</span> 再掷一次</button>
         </div>
-        <div class="prompt-strip"><span class="prompt-icon">✎</span><div><b>故事开头小帮手</b><p>{{ starterLines[starterIndex] }}</p></div><button class="text-button" @click="randomStarter">换一句 ↗</button></div>
+        <div class="prompt-strip"><span class="prompt-icon">✎</span><div><b>故事开头小帮手</b><p>{{ starterLines[starterIndex] }}</p></div><div class="prompt-actions"><button class="text-button" @click="randomStarter">换一句 ↗</button><button class="text-button" @click="startDraft">用这些灵感开写 ↗</button></div></div>
       </section>
 
       <section v-else class="workspace">
