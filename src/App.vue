@@ -37,26 +37,42 @@ function sampleCards(count, excluded = []) {
   }
   return result
 }
+const requiredDiceCategories = ['人物', '地点', '事件', '物品']
+
 function rollDice() {
   const fixed = diceCards.value.filter(card => lockedIds.value.includes(card.id))
-  const next = sampleCards(diceCount - fixed.length, fixed.map(card => card.id))
+  const selectedIds = fixed.map(card => card.id)
+  const next = []
 
-  // 每次骰子组合至少出现一个故事角色，帮助低龄孩子更容易开始讲故事。
-  if (![...fixed, ...next].some(card => card.category === '人物') && next.length > 0) {
-    const availableCharacters = iconLibrary.filter(
-      card => card.category === '人物' && !fixed.some(item => item.id === card.id)
+  // 每组骰子至少包含人物、地点、事件和物品；剩余位置自由抽取，允许类别重复。
+  // 同一组中不重复出现完全相同的图案。
+  for (const category of requiredDiceCategories) {
+    if (fixed.some(card => card.category === category)) continue
+    if (next.length >= diceCount - fixed.length) break
+
+    const candidates = iconLibrary.filter(
+      card => card.category === category && !selectedIds.includes(card.id)
     )
-    if (availableCharacters.length) {
-      next[next.length - 1] = availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
+    if (candidates.length) {
+      const picked = candidates[Math.floor(Math.random() * candidates.length)]
+      next.push(picked)
+      selectedIds.push(picked.id)
     }
   }
 
-  diceCards.value = [...fixed, ...next]
+  const remaining = sampleCards(diceCount - fixed.length - next.length, selectedIds)
+  diceCards.value = [...fixed, ...next, ...remaining].slice(0, diceCount)
 }
 function toggleLock(id) {
-  lockedIds.value = lockedIds.value.includes(id)
-    ? lockedIds.value.filter(item => item !== id)
-    : [...lockedIds.value, id]
+  if (lockedIds.value.includes(id)) {
+    lockedIds.value = lockedIds.value.filter(item => item !== id)
+    return
+  }
+  if (lockedIds.value.length >= 3) {
+    notice.value = '最多锁定 3 个图案，这样每次还能抽到新的故事元素哦！'
+    return
+  }
+  lockedIds.value = [...lockedIds.value, id]
 }
 function rollBox(categoryId) {
   const category = blindboxCategories.find(item => item.id === categoryId)
@@ -218,6 +234,18 @@ loadStories()
               </g>
               <g v-else-if="card.id === 'ball'">
                 <circle cx="60" cy="54" r="34" fill="#fffdf7" stroke="#5f806f" stroke-width="2.5"/><path d="M60 36L75 47L69 65H51L45 47Z" fill="#5f806f"/><path d="M60 36L58 21M75 47L91 42M69 65L79 79M51 65L41 79M45 47L29 42" stroke="#5f806f" stroke-width="3" stroke-linecap="round"/><path d="M18 91Q60 78 102 91" fill="none" stroke="#72b887" stroke-width="4" stroke-linecap="round"/>
+              </g>
+              <g v-else-if="card.id === 'book'">
+                <path d="M20 25Q40 17 59 29V88Q40 76 20 84Z" fill="#ef9d83" stroke="#9a6656" stroke-width="2.7" stroke-linejoin="round"/><path d="M59 29Q79 17 100 25V84Q79 76 59 88Z" fill="#fff0c9" stroke="#9a6656" stroke-width="2.7" stroke-linejoin="round"/><path d="M59 29V88" stroke="#9a6656" stroke-width="2.5"/><path d="M31 40Q42 37 49 42M31 51Q42 48 49 53M70 41Q82 36 91 40M70 52Q82 47 91 51" stroke="#bf7c68" stroke-width="2.5" stroke-linecap="round"/><path d="M80 8L84 17L94 18L87 25L89 35L80 30L71 35L73 25L66 18L76 17Z" fill="#f0c65e"/>
+              </g>
+              <g v-else-if="card.id === 'key'">
+                <circle cx="38" cy="42" r="20" fill="#ffda77" stroke="#a17a3d" stroke-width="3"/><circle cx="38" cy="42" r="8" fill="#fff9e9" stroke="#a17a3d" stroke-width="2.5"/><path d="M54 55L88 89L99 78L91 70L99 62L87 50L79 58L68 47Z" fill="#ffda77" stroke="#a17a3d" stroke-width="3" stroke-linejoin="round"/><path d="M72 65L80 57" stroke="#fff2bf" stroke-width="3" stroke-linecap="round"/><path d="M84 15L87 22L95 25L87 28L84 36L81 28L73 25L81 22Z" fill="#e8ad52"/>
+              </g>
+              <g v-else-if="card.id === 'umbrella'">
+                <path d="M15 50Q18 17 60 15Q102 17 105 50Q93 41 82 50Q71 40 60 50Q48 40 37 50Q26 41 15 50Z" fill="#8fc5ed" stroke="#5b89b4" stroke-width="2.7" stroke-linejoin="round"/><path d="M60 18V79Q60 92 72 88Q78 85 75 78" fill="none" stroke="#8b6c55" stroke-width="4" stroke-linecap="round"/><path d="M33 61L29 70M87 61L83 70" stroke="#6da6d7" stroke-width="3" stroke-linecap="round"/><path d="M34 35L40 42M60 27V39M84 35L78 42" stroke="#fff4d6" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <g v-else-if="card.id === 'backpack'">
+                <path d="M39 29V23Q39 12 51 12H69Q81 12 81 23V29" fill="none" stroke="#a86d7a" stroke-width="5" stroke-linecap="round"/><rect x="27" y="27" width="66" height="65" rx="15" fill="#f0a9bc" stroke="#a86d7a" stroke-width="2.7"/><rect x="38" y="53" width="44" height="27" rx="8" fill="#ffdfaa" stroke="#a86d7a" stroke-width="2.5"/><path d="M27 45H18V75H28M92 45H101V75H92" fill="none" stroke="#a86d7a" stroke-width="3.5" stroke-linecap="round"/><circle cx="60" cy="66" r="4" fill="#a86d7a"/><path d="M60 62V70M56 66H64" stroke="#fff5d9" stroke-width="1.5"/>
               </g>
               <g v-else-if="card.id === 'rain'">
                 <path d="M27 51Q13 48 18 35Q22 24 35 28Q43 9 60 22Q72 13 84 26Q102 26 102 42Q102 53 88 54Z" fill="#b8d9f6" stroke="#6b96c0" stroke-width="2.5"/><path d="M35 65L29 77M59 65L53 77M83 65L77 77" stroke="#5d9ed0" stroke-width="5" stroke-linecap="round"/><path d="M35 84L31 92M59 84L55 92M83 84L79 92" stroke="#8bbce6" stroke-width="4" stroke-linecap="round"/>
