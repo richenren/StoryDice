@@ -92,7 +92,7 @@ function startDraft() {
     : blindboxCategories.map(category => blindbox.value[category.id]).filter(Boolean).join('、')
   storyTitle.value = storyTitle.value || '我的奇妙故事'
   storyText.value = storyText.value ? storyText.value + '\n' : ''
-  storyText.value += starterLines[starterIndex.value] + '\n今天的灵感：' + prompts + '。\n'
+  storyText.value += starterLines[starterIndex.value] + '\n今天抽到的灵感：' + prompts + '。\n小提示：这些只是灵感，不必全部用上，也不必按顺序讲；你可以改变它们的意思，加入新角色，让故事变得更奇妙！\n'
   showSaved.value = false
   document.querySelector('#story-editor')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }
@@ -277,7 +277,7 @@ loadStories()
           <p><span class="tiny-sparkle">✦</span> 选中 {{ lockedIds.length }} 个图案已锁定，再掷一次试试！</p>
           <button class="button-primary" @click="rollDice"><span>↻</span> 再掷一次</button>
         </div>
-        <div class="prompt-strip"><span class="prompt-icon">✎</span><div><b>故事开头小帮手</b><p>{{ starterLines[starterIndex] }}</p></div><div class="prompt-actions"><button class="text-button" @click="randomStarter">换一句 ↗</button><button class="text-button" @click="startDraft">用这些灵感开写 ↗</button></div></div>
+        <div class="prompt-strip"><span class="prompt-icon">✎</span><div><b>故事开头小帮手</b><p>{{ starterLines[starterIndex] }}</p><small class="free-play-note">图案只是灵感，不必全部使用，也不必按顺序；大胆改编就好！</small></div><div class="prompt-actions"><button class="text-button" @click="randomStarter">换一句 ↗</button><button class="text-button" @click="startDraft">用这些灵感开写 ↗</button></div></div>
       </section>
 
       <section v-else class="workspace">
